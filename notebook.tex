@@ -1,0 +1,1208 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Math 377 Lesson 13 Solution}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{Probability Distributions}\label{probability-distributions}
+
+\subsubsection{Professors Warner and
+Horton}\label{professors-warner-and-horton}
+
+In this notebook, we will introduce some of the more common discrete and
+continuous probability distributions. These are commonly used to model
+random events.
+
+    \subsubsection{Discrete Distributions}\label{discrete-distributions}
+
+    Remember that a random variable is a mapping from the sample space to a
+real number, \(X:S \rightarrow \mathbb{R}\). The \emph{probability mass
+function} (pmf) is a function that maps each outcome of the random
+variable to a real number between 0 and 1,
+\(f: \mathbb{R} \rightarrow [0,1]\), such that for all
+\(x \in \mathbb{R}\),
+
+\[f(x)=P(X=x)\]
+
+    Another useful idea is that of the \emph{cumulative distribution
+function} (cdf) which is:
+
+\[ F_{X}(x) = P(X \leq x)\]
+
+    The pmf can be written as an explicit function, a table, a plot, or
+words. We will focus on the first. Most problems take a wording and
+convert it to a table of function.
+
+    \subparagraph{Example}\label{example}
+
+A team is playing a two game series against another team. The
+probability of winning the first game is 0.52 and the probability of
+winning the second, your star player has a planned absence, is 0.43. Let
+\(X\) be the number of games won in the two played.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  Determine the probability mass function as a table.\\
+\item
+  Find the cumulative distribution function as a table.\\
+\item
+  Find the probability of winning at least one game.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Run this code to import packages}
+        \PY{k+kn}{import} \PY{n+nn}{datascience} \PY{k}{as} \PY{n+nn}{ds}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{stats}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    The random variable \(X\) the number of games won in two played. It can
+take the values \({0,1,2}\). The sample space is \({LL,LW,WL,WW}\) which
+we will map to the random variable. Thus \(LL \rightarrow 0\),
+\(LW \rightarrow 1\), \(WL \rightarrow 1\), and \(WW \rightarrow 2\).
+The pmf is:
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  Find the probability mass function.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{w1}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{52}
+        \PY{n}{w2}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{43}
+        \PY{n}{pmf\PYZus{}table}\PY{o}{=}\PY{n}{ds}\PY{o}{.}\PY{n}{Table}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{with\PYZus{}columns}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of Wins (x)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+        \PY{n}{probs}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{w1}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{w2}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{w1}\PY{p}{)}\PY{o}{*}\PY{n}{w2}\PY{o}{+}\PY{n}{w1}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{w2}\PY{p}{)}\PY{p}{,}\PY{n}{w1}\PY{o}{*}\PY{n}{w2}\PY{p}{]}\PY{p}{)}
+        \PY{n}{pmf\PYZus{}table}\PY{o}{=}\PY{n}{pmf\PYZus{}table}\PY{o}{.}\PY{n}{with\PYZus{}columns}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Probability P(X=x)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{probs}\PY{p}{]}\PY{p}{)}
+        \PY{n}{pmf\PYZus{}table}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} Number of Wins (x) | Probability P(X=x)
+        0                  | 0.2736
+        1                  | 0.5028
+        2                  | 0.2236
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Find the cumulative probability distribution.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{cdf}\PY{p}{(}\PY{n}{table}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}Given a two column table with values in first column and probability mass in the second,}
+        \PY{l+s+sd}{    return a table of the cdf}
+        \PY{l+s+sd}{    table \PYZhy{} Two columns will realizations of the random variable in first and probability in second\PYZsq{}\PYZsq{}\PYZsq{}}
+            \PY{n}{temp}\PY{o}{=}\PY{n}{table}\PY{o}{.}\PY{n}{select}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{with\PYZus{}columns}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cumulative Probability}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{cumsum}\PY{p}{(}\PY{n}{table}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{temp}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{cdf}\PY{p}{(}\PY{n}{pmf\PYZus{}table}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} Number of Wins (x) | Cumulative Probability
+        0                  | 0.2736
+        1                  | 0.7764
+        2                  | 1
+\end{Verbatim}
+            
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Find the probability of winning at least one game.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{pmf\PYZus{}table}\PY{o}{.}\PY{n}{column}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{take}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} 0.7263999999999999
+\end{Verbatim}
+            
+    \paragraph{Moments}\label{moments}
+
+    Random variables can be summarized with expected values. In general, let
+\(X\) be a discrete random variable with pmf \(f(x)\). Then
+\[E(g(X)) = \sum_{x}g(x)f(x)\]
+
+    The mean is \[E(X) = \mu = \sum_{x}xf(x),\] also called the first moment
+about the origin, and variance is
+\[E((X- \mu)^{2})  = V(X) = \sigma ^{2} =\sum_{x}(x - \mu)^{2}f(x), \]
+known as the second moment about the mean.
+
+    For our problem above, find the mean and variance.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{pmf\PYZus{}table}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} Number of Wins (x) | Probability P(X=x)
+         0                  | 0.2736
+         1                  | 0.5028
+         2                  | 0.2236
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{p}{(}\PY{n}{pmf\PYZus{}table}\PY{o}{.}\PY{n}{column}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{*}\PY{n}{pmf\PYZus{}table}\PY{o}{.}\PY{n}{column}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} 0.95
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{p}{(}\PY{p}{(}\PY{n}{pmf\PYZus{}table}\PY{o}{.}\PY{n}{column}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.95}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{pmf\PYZus{}table}\PY{o}{.}\PY{n}{column}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} 0.49470000000000003
+\end{Verbatim}
+            
+    \subsubsection{Named Discrete
+Distributions}\label{named-discrete-distributions}
+
+    Helpfully, random variables often take on familiar "named"
+distributions. Such distributions occur often enough that we know the
+generic form of the pmf, expected value and variance. In these cases, we
+can avoid deriving the pmf like we did in 1) above. Below, we introduce
+many common "named" discrete distributions.
+
+    \paragraph{Binomial}\label{binomial}
+
+If each trial of an experiment has only two outcomes, arbitrarily named
+success and failure, where the probability of success of each trial is
+constant and independent of the prior trials and the number of trials is
+fixed in advance, then we have a binomial random variable.\\
+The general form of the random variable is \(X\) is the number of
+successes in \(n\) trials, where \(p\) is the probability of success in
+a single trial.
+
+    The closed form solution to the pmf is
+\[f(x;n,p) = {n\choose x}p^{x}(1-p)^{n-x}\]
+
+    Write a function to find the pmf of a binomial and then use it to make a
+second cdf function. The following function will help.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{n}{factorial}
+         
+         \PY{k}{def} \PY{n+nf}{choose}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{c}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}Number of ways to choose c items from a list of n items.\PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{k}{return} \PY{n}{factorial}\PY{p}{(}\PY{n}{n}\PY{p}{)} \PY{o}{/}\PY{o}{/} \PY{p}{(}\PY{n}{factorial}\PY{p}{(}\PY{n}{n} \PY{o}{\PYZhy{}} \PY{n}{c}\PY{p}{)} \PY{o}{*} \PY{n}{factorial}\PY{p}{(}\PY{n}{c}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{def} \PY{n+nf}{my\PYZus{}binom}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{n}\PY{p}{,}\PY{n}{p}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}pmf of binomial r.v.; returns the probability of x successes out of n trials }
+         \PY{l+s+sd}{    where each trial has probability p of success\PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{k}{return} \PY{n}{choose}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{x}\PY{p}{)}\PY{o}{*}\PY{n}{p}\PY{o}{*}\PY{o}{*}\PY{n}{x}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{p}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{my\PYZus{}binom}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{o}{.}\PY{l+m+mi}{25}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} 0.375
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k}{def} \PY{n+nf}{binom\PYZus{}table}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{p}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}Create the pmf table for a binomial\PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{n}{pmf\PYZus{}table}\PY{o}{=}\PY{n}{ds}\PY{o}{.}\PY{n}{Table}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{with\PYZus{}columns}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of Successes (x)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{pmf\PYZus{}table}\PY{o}{=}\PY{n}{pmf\PYZus{}table}\PY{o}{.}\PY{n}{with\PYZus{}columns}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Probability P(X=x)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{pmf\PYZus{}table}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{my\PYZus{}binom}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{n}\PY{p}{,}\PY{n}{p}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{pmf\PYZus{}table}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{binom\PYZus{}table}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{o}{.}\PY{l+m+mi}{25}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} Number of Successes (x) | Probability P(X=x)
+         0                       | 0.316406
+         1                       | 0.421875
+         2                       | 0.210938
+         3                       | 0.046875
+         4                       | 0.00390625
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{cdf}\PY{p}{(}\PY{n}{binom\PYZus{}table}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{o}{.}\PY{l+m+mi}{25}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} Number of Successes (x) | Cumulative Probability
+         0                       | 0.316406
+         1                       | 0.738281
+         2                       | 0.949219
+         3                       | 0.996094
+         4                       | 1
+\end{Verbatim}
+            
+    \subparagraph{Checking results}\label{checking-results}
+
+    The scipy package has common "named" distributions built into its stats
+module. See the
+\href{https://docs.scipy.org/doc/scipy/reference/stats.html}{link} to
+the package.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{stats}\PY{o}{.}\PY{n}{binom}\PY{o}{.}\PY{n}{pmf}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{o}{.}\PY{l+m+mi}{25}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} 0.21093750000000006
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{stats}\PY{o}{.}\PY{n}{binom}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{o}{.}\PY{l+m+mi}{25}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} 0.94921875
+\end{Verbatim}
+            
+    The mean and variance of a binomial are \[E(X) = np\] and
+\[V(X) = np(1-p)\]
+
+    \subparagraph{Randomization}\label{randomization}
+
+The scipy package also allows you to obtain random realizations from a
+random variable with a named distribution.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{rands}\PY{o}{=}\PY{n}{stats}\PY{o}{.}\PY{n}{binom}\PY{o}{.}\PY{n}{rvs}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mf}{0.25}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}
+         \PY{n}{rands}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} array([2, 0, 0, 2, 1, 1, 1, 0, 0, 0])
+\end{Verbatim}
+            
+    Let's look at the mean and variance of our random sample and compare
+with the mean and variance above.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{}Mean of random sample}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{rands}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Population mean}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{4}\PY{o}{*}\PY{l+m+mf}{0.25}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Var of random sample}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{rands}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}Population variance}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{4}\PY{o}{*}\PY{l+m+mf}{0.25}\PY{o}{*}\PY{l+m+mf}{0.75}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1.038
+1.0
+0.7645559999999999
+0.75
+
+    \end{Verbatim}
+
+    \subparagraph{Example}\label{example}
+
+Suppose you toss a fair die 12 times. Let \(X\) be the number of rolls
+that resulted in 1 or 2.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Find the pmf of \(X\).
+\item
+  Find the mean and variance of \(X\).
+\item
+  Find the probability that \(X\) is in the interval \([3,7]\).
+\end{enumerate}
+
+    \(X \sim \textsf{Bin}(12,1/3)\)
+
+\(E(X) = 12*1/3 = 4\)
+
+\(V(X) = 12*1/3*2/3 = 2.667\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{stats}\PY{o}{.}\PY{n}{binom}\PY{o}{.}\PY{n}{pmf}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} 0.8001189219499428
+\end{Verbatim}
+            
+    \paragraph{Negative Binomial}\label{negative-binomial}
+
+Similar to binomial except that the failures, thus the trials, are
+random and the successes are fixed. Notice that the last trial has to be
+a success.\\
+The general form of the random variable is \(X\) number of failures
+until the rth success.\\
+The geometric distribution is a special case where r is 1. Since the
+trials are not fixed, \(x = 0, 1, 2, 3, ...\)
+
+    The closed form solution to the pmf is
+\[f(x;r,p) = {x+r-1\choose x}p^{r}(1-p)^{x}\]
+
+    The mean and variance of a negative binomial are
+\[E(X) = \frac{r}{p}-r\] and \[V(X) = \frac{r(1-p)}{p^2}\]
+
+    \subparagraph{Example}\label{example}
+
+Suppose I am a 60\% free throw shooter (the probability of making a free
+throw is 0.6, and all my free throws are independent with identical
+chance of success). I would like to make 5 free throws. Let \(X\) be the
+number of misses before I make 5 free throws.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Find the mean and variance of \(X\).
+\item
+  Find the probability I only need 5 attempts to make 5 free throws.
+\item
+  Find the probability I need at least 10 attempts to make 5 free
+  throws.
+\end{enumerate}
+
+    \(X\sim \textsf{NegBin}(5,0.6)\)
+
+\(E(X)=5/0.6 - 5 = 2.333\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{}Variance}
+         \PY{n}{r}\PY{p}{,} \PY{n}{p} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mf}{0.6}
+         \PY{n}{vx}\PY{o}{=}\PY{n}{r}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{p}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{p}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{vx}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} 5.555555555555555
+\end{Verbatim}
+            
+    \paragraph{Poisson}\label{poisson}
+
+The Poisson distribution is common for modeling count or arrival data.
+It is common to model arrivals using the Poisson process. In this
+process, \(X\), the number of arrivals in a specified amount of time,
+follows the Poisson distribution with parameter \(\lambda\), the average
+number of arrivals in that specified amount of time. For
+\(x = 0,1,2,3,...\), the closed form solution to the pmf is \[
+f(x;\lambda)=\frac{e^{-\lambda}\lambda^x}{x!}
+\]
+
+    The mean and variance are \[E(X)=V(X)=\lambda\]
+
+    \subparagraph{Example}\label{example}
+
+Suppose fleet vehicles arrive to a maintenance garage at an average rate
+of 4 per day. Let's model these arrivals using the Poisson process. Let
+\(X\) be the number of vehicles that arrive in a five day period.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  What is the distribution (with parameter) of \(X\)?
+\item
+  Find the probability that fewer than 10 vehicles arrive in a five day
+  period.
+\item
+  Find the probability that at least 18 vehicles arrive in a five day
+  period.
+\end{enumerate}
+
+    \(X\sim \textsf{Pois}(\lambda=20)\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} number 2, fewer than 10; P(X\PYZlt{}=9)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{stats}\PY{o}{.}\PY{n}{poisson}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} number 3, at least 18; P(X\PYZgt{}=18) = 1\PYZhy{}P(X\PYZlt{}=17)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{stats}\PY{o}{.}\PY{n}{poisson}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{l+m+mi}{17}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.0049954123083075785
+0.7029716020753259
+
+    \end{Verbatim}
+
+    \paragraph{Hypergeometric}\label{hypergeometric}
+
+The hypergeometric distribution is similar to the binomial distribution,
+but where outcomes are drawn without replacement. \(X\) is the number of
+successes out of \(N\) trials, but these trials are selected out of a
+finite population containing \(M\) objects with \(n\) successes. We can
+think of this as an urn problem similar to those we discussed in the
+Lesson 8 notebook. For \(N-(M-n) \leq x \leq \min(n,N)\), \[
+f(x;N,n,M)= \frac{{n\choose k}{{M-n}\choose {N-k}}}{M\choose N}
+\]
+
+The mean and variance are \[
+E(X)=\frac{nN}{M}
+\]
+
+and \[
+V(X)=\frac{nN(M-n)(M-N)}{M^2(M-1)}
+\]
+
+    \subparagraph{Example}\label{example}
+
+Suppose we have an urn containing 6 blue, 9 red and 8 white balls. We
+select 6 at random. Let \(X\) be the number of red balls we select in
+our sample of 6.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Find the expected value of \(X\).
+\item
+  Find \(P(X\geq 2)\).
+\item
+  Find the variance of \(X\). Verify your calculation by generating a
+  large random sample and computing the variance of that random sample.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{N}\PY{p}{,}\PY{n}{n}\PY{p}{,}\PY{n}{M} \PY{o}{=} \PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{23}
+         \PY{c+c1}{\PYZsh{} number 1, E(X)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Expected value is }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{n}\PY{o}{*}\PY{n}{N}\PY{o}{/}\PY{n}{M}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} number 2, P(X\PYZgt{}=2) or 1\PYZhy{}P(X\PYZlt{}=1)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{P(X\PYZgt{}=2) =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{stats}\PY{o}{.}\PY{n}{hypergeom}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{M}\PY{p}{,}\PY{n}{n}\PY{p}{,}\PY{n}{N}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} number 3, variance}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Variance is }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{n}\PY{o}{*}\PY{n}{N}\PY{o}{*}\PY{p}{(}\PY{n}{M}\PY{o}{\PYZhy{}}\PY{n}{n}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{M}\PY{o}{\PYZhy{}}\PY{n}{N}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{M}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{*}\PY{p}{(}\PY{n}{M}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} verify variance}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Variance of large sample is }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{stats}\PY{o}{.}\PY{n}{hypergeom}\PY{o}{.}\PY{n}{rvs}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{n}\PY{p}{,}\PY{n}{N}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{)}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Expected value is  2.347826086956522
+P(X>=2) = 0.7917620137299766
+Variance is  1.1043134559202612
+Variance of large sample is  1.11567324
+
+    \end{Verbatim}
+
+    \paragraph{Uniform}\label{uniform}
+
+A random variable with the discrete uniform distribution, with
+parameters \(a\) and \(b\), has an equal probability of taking on any
+integers in the range \([a,b)\). For \(a\leq x < b\), \[
+f(x;a,b)= \frac{1}{b-a}
+\]
+
+The mean and variance are \[
+E(X) = \frac{b+a-1}{2}
+\]
+
+and \[
+V(X) = \frac{(b-a-1)(b-a+1)}{12}
+\]
+
+    \paragraph{Multinomial}\label{multinomial}
+
+The multinomial distribution is a generalization of binomial
+distribution. In the binomial case, trials can result in either success
+or failure. In the multinomial case, there could be more than two
+distinct outcomes. Here, the random variable \(X\) is a vector (rather
+than a scalar) representing the counts of each outcome. For more
+information regarding the multinomial distribution, please review the
+\texttt{scipy} documentation
+(https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.multinomial.html).
+
+    \subsubsection{Continuous Distributions}\label{continuous-distributions}
+
+    Now we turn to random variables that can take on any value in a range
+rather than only distinct points. These continous distributions differ
+in several ways from their discrete counterparts.
+
+Rather than a pmf, each continuous random variable has a
+\textbf{probability density function} (pdf). This too is represented by
+\(f_X(x)\), but the function does not return a probability but rather a
+density. The pdf has the properties that 1. \(f(x) \geq 0\)
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  \(\int_{-\infty}^{\infty} f(y) dy = 1\)
+\end{enumerate}
+
+Also, each random variable as a \textbf{cumulative distribution
+function} (cdf). This function has the same meaning as in the discrete
+case, but can be found via integration:\\
+\[ F_{X}(x) = P(X \leq x) = \int_{-\infty}^x f(y)dy \]
+
+    Suppose \(Y\) is a continuous random variable that can take any value in
+the interval \([0,1]\). It has the pdf \(f_Y(y) = 2y\) in this interval.
+Because \(Y\) is a continuous random variable the probablility at any
+specific value is technically 0. We could find the probability that
+\(Y\) takes a value in any range by integrating across this function.
+For example: \[
+P(0\leq Y \leq 0.5) = \int_0^{0.5} 2y dy = y^2\bigg|_0^{0.5} = 0.25
+\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{integrate}
+\end{Verbatim}
+
+
+    Create a function for the pdf
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{k}{def} \PY{n+nf}{my\PYZus{}pdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{x}\PY{o}{\PYZlt{}}\PY{l+m+mi}{0} \PY{o+ow}{or} \PY{n}{x}\PY{o}{\PYZgt{}}\PY{l+m+mi}{1}\PY{p}{:}
+                 \PY{k}{return} \PY{l+m+mi}{0}
+             \PY{k}{return} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{x}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{integrate}\PY{o}{.}\PY{n}{quad}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{my\PYZus{}pdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{.}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} 0.25
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{integrate}\PY{o}{.}\PY{n}{quad}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{my\PYZus{}pdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} 1.0
+\end{Verbatim}
+            
+    \subsubsection{Moments}\label{moments}
+
+As in the discrete case, continuous random variables can be summarized
+using moments. However, we can use integration rather than direct sums.
+Let \(X\) be a continuous random variable with pdf \(f(x)\): \[
+E(g(x))=\int_x g(x)f(x)dx
+\]
+
+The mean, or expected value, of \(X\) is found by: \[
+E(X)=\int_x xf(x)dx
+\]
+
+The variance of \(X\) is: \[
+V(X)=E((X-\mu)^2)=\int_x (x-\mu)^2f(x) dx
+\]
+
+Also, the expression for variance can be simplified to
+\(V(X)= E(X^2) - \mu^2\).
+
+    We can use Python to integrate numerically. To find the expected value
+of \(X\):
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{integrate}\PY{o}{.}\PY{n}{quad}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{x}\PY{o}{*}\PY{n}{my\PYZus{}pdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} 0.66667
+\end{Verbatim}
+            
+    \subparagraph{Example}\label{example}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Let \(g(x)=kx^2\) on \([0,2]\). Find \(k\) that makes \(g(x)\) a
+  proper pdf.
+\item
+  Find \(P(.5<X<1.5)\)
+\item
+  Find \(E(X)\)
+\end{enumerate}
+
+    Need to find \(k\) such that \(\int_0^2 kx^2 dx=1\). \[
+\int_0^2 kx^2 dx= \frac{kx^3}{3}\bigg|_0^2 = \frac{8k}{3} = 1
+\]
+
+Thus, \(k=\frac{3}{8}\).
+
+    \[
+P(0.5<X<1.5) = \int_{0.5}^{1.5} \frac{3x^2}{8} dx = \frac{x^3}{8}\bigg|_{0.5}^{1.5} = \frac{27}{64}-\frac{1}{64} = 0.4063
+\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{k}{def} \PY{n+nf}{my\PYZus{}pdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{x}\PY{o}{\PYZlt{}}\PY{l+m+mi}{0} \PY{o+ow}{or} \PY{n}{x}\PY{o}{\PYZgt{}}\PY{l+m+mi}{2}\PY{p}{:}
+                 \PY{k}{return} \PY{l+m+mi}{0}
+             \PY{k}{return} \PY{p}{(}\PY{l+m+mi}{3}\PY{o}{/}\PY{l+m+mi}{8}\PY{p}{)}\PY{o}{*}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+         
+         \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{integrate}\PY{o}{.}\PY{n}{quad}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{my\PYZus{}pdf}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{l+m+mf}{1.5}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:} 0.40625
+\end{Verbatim}
+            
+    \paragraph{Uniform}\label{uniform}
+
+The simplest continuous distribution is the uniform distribution. Let
+\(X\) be a random variable that has the continuous uniform distribution
+on \([a,b]\). \(X\) has equal probability of taking any value in this
+range. For \(a \leq x \leq b\), \[
+f(x)=\frac{1}{b-a}
+\]
+
+The mean and variance are \[
+E(X)=\frac{a+b}{2}
+\]
+
+and \[
+V(X)=\frac{(b-a)^2}{12}
+\]
+
+    \paragraph{Exponential}\label{exponential}
+
+The exponential distribution is closely related to the Poisson
+distribution. Both distributions are results of a Poisson process.
+Recall that in a Poisson process, if \(X\) represents the number of
+arrivals in a certain amount of time, then \(X\) follows a Poisson
+distribution with parameter \(\lambda\), the mean number of arrivals in
+that amount of time.
+
+Let \(Y\) represent the amount of time until the next arrival in this
+process. \(Y\) follows an exponential distribution with parameter
+\(\lambda\), the mean number of arrivals in \emph{unit} time. Note that
+in \texttt{scipy}, the parameter is specified with the \texttt{scale}
+argument, where \texttt{scale} is equal to \(1/\lambda\).
+
+For \(y\geq 0\), \[
+f(y)=\lambda e^{-\lambda y}
+\]
+
+The mean and variance are \[
+E(Y)=\frac{1}{\lambda}
+\] and \[
+V(Y)=\frac{1}{\lambda^2}
+\]
+
+    \subparagraph{Example}\label{example}
+
+Suppose fleet vehicles arrive to a maintenance garage at an average rate
+of 4 per day. Let's model these arrivals using the Poisson process. Let
+\(Y\) be the time (in days) until the next arrival.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  What is the distribution (with parameter) of \(Y\)?
+\item
+  Find the probability that no vehicles arrive in the next five days.
+\item
+  Find the probability that the next vehicle will arrive at least 2 days
+  from now, but before 4 days from now.
+\end{enumerate}
+
+    \(Y\sim \textsf{Exp}(4)\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{c+c1}{\PYZsh{}P(Y\PYZgt{}=5) or 1\PYZhy{}P(Y\PYZlt{}5)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{stats}\PY{o}{.}\PY{n}{expon}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{n}{scale}\PY{o}{=}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}P(2\PYZlt{}=Y\PYZlt{}4)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{stats}\PY{o}{.}\PY{n}{expon}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{n}{scale}\PY{o}{=}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{4}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{stats}\PY{o}{.}\PY{n}{expon}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{scale}\PY{o}{=}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2.0611535811454473e-09
+0.00033535009272778193
+
+    \end{Verbatim}
+
+    \paragraph{Normal}\label{normal}
+
+The normal (or Gaussian) distribution is an incredibly important
+distribution in probability and statistics. You have certainly seen a
+bell curve at some point and are likely aware that certain quantities
+take a bell shaped, or normal, distribution.
+
+Let \(X \sim \textsf{N}(\mu,\sigma)\). The parameters \(\mu\) and
+\(\sigma\) represent the mean and standard deviation of \(X\). In
+\texttt{scipy}, these are referred to as \texttt{loc} and
+\texttt{scale}.
+
+For \(-\infty < x < \infty\), \[
+f(x;\mu,\sigma) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\]
+
+As mentioned, the mean and variance are \(\mu\) and \(\sigma^2\).
+
+    \subparagraph{Example}\label{example}
+
+Let \(X\) follow the normal distribution with mean 3 and standard
+deviation 10.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Find \(P(X<0)\).
+\item
+  Find the 90th percentile of \(X\).
+\item
+  Given \(X\) is greater than the mean, find the probability that \(X\)
+  is less than the mean plus two standard deviations.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{c+c1}{\PYZsh{} P(X\PYZlt{}0)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 90th percentile, or x such that P(X\PYZlt{}x)=0.90}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{l+m+mf}{0.9}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.3820885778110474
+15.815515655446003
+
+    \end{Verbatim}
+
+    For number 3, we need to find the conditional probablity: \[
+P(X<10+6 | X>3) = \frac{P(3<X<16)}{P(X>3)}
+\]
+
+Note that since the normal distribution is symmetric about the mean, we
+know that \(P(X>3)=0.5\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n+nb}{print}\PY{p}{(}\PY{p}{(}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mf}{0.5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.8063990308287794
+
+    \end{Verbatim}
+
+    \paragraph{Gamma}\label{gamma}
+
+    The gamma distribution is a generalization of the exponential
+distribution. If \(X\) has the gamma distribution with parameters
+\(\alpha\) and \(\lambda\). Note that in \texttt{scipy}, \(\alpha\) is
+the shape parameter, \(a\), and \(\lambda\) is the inverse of the scale
+parameter (similar to the exponential distribution).
+
+For \(x\geq 0\), \[
+f(x;\alpha,\lambda)= \frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\lambda x}
+\]
+
+The mean and variance are: \[
+E(X)=\frac{\alpha}{\lambda}
+\]
+
+and \[
+V(X)=\frac{\alpha}{\lambda^2}
+\]
+
+    \subparagraph{Example}\label{example}
+
+Let \(X \sim \textsf{Gamma}(3,0.7)\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Find \(P(X>E(X))\)
+\item
+  Find \(P(X\leq 1)\)
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{c+c1}{\PYZsh{}P(X\PYZgt{}E(X))}
+         \PY{n}{a}\PY{p}{,}\PY{n}{l}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mf}{0.7}
+         \PY{n}{ex}\PY{o}{=}\PY{n}{a}\PY{o}{/}\PY{n}{l}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{stats}\PY{o}{.}\PY{n}{gamma}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{n}{ex}\PY{p}{,}\PY{n}{a}\PY{p}{,}\PY{n}{scale}\PY{o}{=}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{l}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}P(X\PYZlt{}=1)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{stats}\PY{o}{.}\PY{n}{gamma}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{a}\PY{p}{,}\PY{n}{scale}\PY{o}{=}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{l}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.4231900811268434
+0.0341415841257085
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{\PYZus{}}\PY{p}{,}\PY{n}{ax}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{x}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{0.001}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mf}{0.001}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{stats}\PY{o}{.}\PY{n}{gamma}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{a}\PY{p}{,}\PY{n}{scale}\PY{o}{=}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{l}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_90_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Note that we can plot the exponential distribution with \(\lambda=0.7\)
+by setting \(a=1\):
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{\PYZus{}}\PY{p}{,}\PY{n}{ax}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{x}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mf}{0.001}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mf}{0.001}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{stats}\PY{o}{.}\PY{n}{gamma}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{scale}\PY{o}{=}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{l}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_92_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{Beta}\label{beta}
+
+The beta distribution is unique among continuous distributions in that
+it applies only to random variables restricted to the domain \([0,1]\).
+The continuous uniform distribution is a special case of the beta
+distribution. To learn more about the beta distribution, see the
+\texttt{scipy} documentation:
+https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html\#scipy.stats.beta
+
+    \subparagraph{Example}\label{example}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  What are the parameters of the beta distribution that make the
+  distribution equivalent to \(\textsf{Unif}(0,1)\)?
+\end{enumerate}
+
+    When \(a\) and \(b\) are both 1, the pdf of \(X\) reduces to a constant,
+which must be 1 in order to result in a valid pdf.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
